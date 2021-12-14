@@ -1,0 +1,7 @@
+mm2*
+*.zip
+coins
+*.json
+.env
+libmm2*
+*.csv
