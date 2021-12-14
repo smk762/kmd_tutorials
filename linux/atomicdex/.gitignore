@@ -5,3 +5,4 @@ coins
 .env
 libmm2*
 *.csv
+userpass
