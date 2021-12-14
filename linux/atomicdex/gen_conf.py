@@ -11,13 +11,13 @@ import mnemonic
 conf = {
     "gui": "NN_SEED",
     "netid": 7777,
-    "i_am_seed":True,
+    "i_am_seed":False,
     "rpc_password": "RPC_CONTROL_USERPASSWORD",
     "passphrase": "YOUR SEED PHRASE",
     "userhome": "/${HOME#\"/\"}"
 }
 
-special_chars = ["$", "@", "~", "-", "_", "|", "(", ")", ":", "+"]
+special_chars = ["@", "~", "-", "_", "|", "(", ")", ":", "+"]
 
 def generate_rpc_pass(length):
 	rpc_pass = ""

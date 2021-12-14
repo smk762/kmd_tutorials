@@ -1,4 +1,10 @@
-# Scripts and Tools for Komodo Platform Tutorials
+# Prerequisites
 
-Companion resources for [Komodo Platform Developers Documentation](https://developers.komodoplatform.com/)
+```bash
+sudo apt install wget curl jq git python3-pip
+pip3 install -r requirements.txt
+```
 
+# Recommended
+
+- [Terminator](https://www.linuxshelltips.com/terminator-terminal-emulator/)
