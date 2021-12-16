@@ -6,3 +6,4 @@ coins
 libmm2*
 *.csv
 userpass
+DB/

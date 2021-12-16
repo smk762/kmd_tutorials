@@ -1,5 +1,4 @@
 #!/bin/bash
-pkill -9 mm2
 source userpass
 stdbuf -oL ./mm2 > mm2.log &
 sleep 3
