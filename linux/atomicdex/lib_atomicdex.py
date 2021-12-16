@@ -3,7 +3,6 @@ import os
 import sys
 import json
 import requests
-from dotenv import load_dotenv
 
 if os.path.exists("MM2.json"):
   with open("MM2.json", "r") as f:
