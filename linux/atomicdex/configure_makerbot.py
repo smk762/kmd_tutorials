@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+from lib_atomicdex import *
 
 # Documentation reference: https://developers.komodoplatform.com/basic-docs/atomicdex-api-20-dev/start_simple_market_maker_bot.html
 
