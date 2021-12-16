@@ -15,7 +15,7 @@ from lib_atomicdex import *
 
 limit = 200
 if len(sys.argv) > 1:
-	limit = sys.argv[1]
+	limit = int(sys.argv[1])
 
 resp = mm2_proxy({"userpass":"$userpass","method":"my_recent_swaps","limit":limit})
 get_swaps_sumarised(resp)
