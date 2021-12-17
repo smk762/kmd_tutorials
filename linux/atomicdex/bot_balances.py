@@ -50,7 +50,7 @@ if len(coins) > 0:
 	print("-"*169)
 	print('{:>151s}|{:^16s}|'.format(
 			"Total USD ",
-			f"${total_value}"
+			f"${round(total_value,2)}"
 		)
 	)
 	print('{:>151s}{:^16s}'.format(
