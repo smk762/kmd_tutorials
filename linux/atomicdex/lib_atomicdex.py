@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import time
 import requests
 
 if os.path.exists("MM2.json"):
@@ -31,7 +32,7 @@ def mm2_proxy(params):
   return r.json()
 
 def get_activate_command(coin):
-  return requests.get(f"http://stats.kmd.io/api/atomicdex/activation_commands/?coin={coin}").json()
+  return requests.get(f"https://stats.kmd.io/api/atomicdex/activation_commands/?coin={coin}").json()
 
 
 def get_swaps_sumarised(my_recent_swaps):
@@ -121,3 +122,43 @@ def get_price(coin, current_prices=None):
   else:
     return 0
 
+
+def output_order_lines(ordertype, orders, current_prices=None):
+  if not current_prices:
+    current_prices = requests.get(PRICES_API).json()
+  for uuid in orders:
+    sell_coin = orders[uuid]['base']
+    buy_coin = orders[uuid]['rel']
+    sell_amount = float(orders[uuid]['max_base_vol'])
+    sell_price_wrt_rel = float(orders[uuid]['price'])
+    buy_amount = sell_amount*sell_price_wrt_rel
+
+    sell_price_cex = get_price(sell_coin, current_prices)
+    buy_price_cex = get_price(buy_coin, current_prices)
+
+    cex_price_ratio = sell_price_cex/buy_price_cex
+    pct_vs_cex = round((sell_price_wrt_rel/cex_price_ratio-1)*100,3)
+    sell_price_usd = sell_price_cex*(1+pct_vs_cex/100)
+    updated = orders[uuid]['updated_at']
+    since = sec_to_hms(int(time.time()) - int(updated)/1000) 
+    print('|{:^7}|{:^38}|{:^12}|{:^12}|{:^16}|{:^16}|{:^16}|{:^16}|{:^10}|{:^15}|'.format(
+        ordertype,
+        uuid,
+        sell_coin,
+        buy_coin,
+        '{:16.8f}'.format(sell_amount),
+        '{:16.8f}'.format(buy_amount),
+        '{:10.2f}'.format(sell_price_usd),
+        '{:10.2f}'.format(sell_price_cex),
+        '{:6.2f}%'.format(pct_vs_cex),
+        since
+      )
+    )
+
+def sec_to_hms(sec):
+  minutes, seconds = divmod(sec, 60)
+  hours, minutes = divmod(minutes, 60)
+  periods = [('h', hours), ('m', minutes), ('s', seconds)]
+  return ' '.join('{}{}'.format(int(val), name) for name, val in periods if val)
+
+  
