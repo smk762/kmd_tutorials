@@ -110,7 +110,7 @@ def get_swaps_sumarised(my_recent_swaps):
     total_delta += value
     print(f"{coin} delta: {swaps_summary['totals_delta'][coin]} (USD${value})")
   print("-------------------------------------------")
-  print(f"Total Delta: USD${total_delta}")
+  print(f"Total Delta: USD${round(total_delta, 2)}")
   print("-------------------------------------------")
 
 
