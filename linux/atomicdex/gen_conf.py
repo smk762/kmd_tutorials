@@ -66,7 +66,3 @@ if resp in ["Y", "y"]:
 	with open("userpass", "w+") as f:
 		f.write(f'userpass="{rpc_password}"')
 	print("userpass file created.")
-
-	with open(".env", "w+") as f:
-		f.write(f'MM2_USERPASS="{rpc_password}"')
-	print(".env file created.")
