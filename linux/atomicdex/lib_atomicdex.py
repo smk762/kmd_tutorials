@@ -117,6 +117,8 @@ def get_swaps_sumarised(my_recent_swaps):
 def get_price(coin, current_prices=None):
   if not current_prices:
     current_prices = requests.get(PRICES_API).json()
+  if '-' in coin:
+    coin = coin.split("-")[0]
   if coin in current_prices:
     return float(current_prices[coin]["last_price"])
   else:
@@ -136,7 +138,7 @@ def output_order_lines(ordertype, orders, current_prices=None):
     sell_price_cex = get_price(sell_coin, current_prices)
     buy_price_cex = get_price(buy_coin, current_prices)
 
-    cex_price_ratio = sell_price_cex/buy_price_cex
+    cex_price_ratio = sell_price_cex/buy_price_cex 
     pct_vs_cex = round((sell_price_wrt_rel/cex_price_ratio-1)*100,3)
     sell_price_usd = sell_price_cex*(1+pct_vs_cex/100)
     updated = orders[uuid]['updated_at']
